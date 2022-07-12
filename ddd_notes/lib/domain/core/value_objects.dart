@@ -20,4 +20,6 @@ abstract class ValueObject<T> {
 
   @override
   String toString() => 'value($value)';
+
+  bool isValid() => value.isRight();
 }
