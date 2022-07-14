@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ddd_notes/domain/core/errors.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'failures.dart';
@@ -22,4 +23,9 @@ abstract class ValueObject<T> {
   String toString() => 'value($value)';
 
   bool isValid() => value.isRight();
+
+  /// Throws [UnexpectedValueError] containing the [ValueFailure]
+  T getOrCrash() {
+    return value.fold((left) => throw UnexpectedValueError(left), (r) => r);
+  }
 }
